@@ -73,9 +73,9 @@ fi
 
 if [ "$var_yay" = true ] ; then
   echo -e \n install yay
-  pacman -S base-devel git
+  pacman -S base-devel git  --no-confirm
   cd /tmp
-  git clone https://aur.archlinux.org/yay-bin.git
+  sudo -u $var_user git clone https://aur.archlinux.org/yay-bin.git
   cd yay-bin/
   sudo -u $var_user makepkg -si
 fi
