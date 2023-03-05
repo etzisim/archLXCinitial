@@ -3,6 +3,7 @@
 var_yay=false
 var_disable_root=false
 var_wheel=false
+var_autoupdate=false
 
 
 clear
@@ -33,6 +34,14 @@ response=${response,,} # tolower
 if [[ $response =~ ^(y|z| ) ]] || [[ -z $response ]]; then
   var_disable_root=true
   echo root account will be disabled
+fi
+
+clear
+read -r -p "enable AutoUpdates? [Y/n]" response
+response=${response,,} # tolower
+if [[ $response =~ ^(y|z| ) ]] || [[ -z $response ]]; then
+  var_autoupdate=true
+  echo automatic Updates will be enabled
 fi
 
 clear
@@ -79,4 +88,9 @@ if [ "$var_yay" = true ] ; then
   cd yay-bin/
   sudo -u $var_user makepkg -si
 fi
+
+if [ "$var_autoupdate" = true ] ; then
+  curl -sSL https://raw.githubusercontent.com/etzisim/AutoUpgrade/main/autoupgrade_install.sh | bash
+fi
+
 exit 0
