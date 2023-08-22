@@ -59,6 +59,10 @@ pacman-key --populate archlinux
 echo update and install sudo,ssh and zsh 
 curl "https://archlinux.org/mirrorlist/?country=all&protocol=http&protocol=https&ip_version=4&use_mirror_status=off" > /etc/pacman.d/mirrorlist
 sed -i 's/#Server/Server/' /etc/pacman.d/mirrorlist
+
+# enable ParallelDownloads
+sed -i 's/#ParallelDownloads/ParallelDownloads/' /etc/pacman.conf
+
 pacman -Syy
 pacman -S archlinux-keyring --noconfirm
 pacman -Syyuu --noconfirm
